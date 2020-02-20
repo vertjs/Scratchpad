@@ -1,0 +1,2 @@
+export const NOTE_TYPE_DRAFT = 'NOTE_TYPE_DRAFT';
+export const NOTE_TYPE_SAVE = 'NOTE_TYPE_SAVE';

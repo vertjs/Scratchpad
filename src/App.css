@@ -1,38 +1,215 @@
-.App {
+.grid {
+  display: grid;
+  grid-template-rows: minmax(100vh, auto); 
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-gap: 10px;
+}
+.container {
+  display: grid;
+  grid-column: 2 / -3;
+  grid-template-rows: minmax(50px, max-content) minmax(50px, max-content); 
+  grid-template-columns: repeat(12, 1fr);
+  grid-gap: 10px;
+  background-color: #cff4c0;
+  grid-auto-rows: auto;
+}
+
+.header {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-row: 1;
+  margin: 10px 10px 0;
+  padding: 0;
+  grid-template-columns: 18fr 1fr;
+  grid-template-rows: auto; 
+}
+.header > h1, .header > h2, .asidebottom > h3 {
+  margin: 0;
+  padding: 0;
+  font-size: 1.8rem;
+}
+.header > h2 {
+  background-color: white;
+  color: black;
+  border-radius: 10px;
+  margin-right: 10px;
+}
+
+.asidetop {
+  grid-column: 1 / 5;
+  margin-left: 10px;
+  display: grid;
+  grid-template-columns: minmax(15px, 1fr);
+  grid-template-rows: minmax(30px, max-content) minmax(0%, 50px); 
+}
+.asidetop > textarea, .asidebottomblock > textarea {
+  resize: none;
+  overflow: hidden;
+  line-height: 20px;
+}
+
+.asidebottom {
+  grid-row: 3 / 6;
+  grid-column: 1 / 5;
+  margin-bottom: 10px;
+  margin-left: 10px;
+}
+.asidebottomblock {
+  display: grid;
+  padding-top: 0;
+  grid-template-columns: minmax(15px, 1fr);
+  grid-template-rows: minmax(30px, max-content) minmax(0%, 30px); 
+}
+
+.main {
+  grid-row: 2 / 6;
+  grid-column: 5 / 13;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 200px);
+  grid-template-rows: repeat(5, max-content);
+}
+
+.mainblock {
+  display: grid;
+  grid-template-columns: 13fr 1fr;
+  grid-template-areas: 
+    "header mark" 
+    "buttons buttons";
+  grid-template-rows: minmax(100px, max-content); 
+  background-color: #a3a6ab !important;
+  margin: 10px;
+}
+.mainblock > textarea {
+  grid-area: header; 
+  margin-top: 10px;
+  resize: none;
+  border: none;
+  background-color: #a3a6ab;
+}
+.mainblock > span {
+  grid-area: mark; 
+  margin-top: 10px;
+}
+
+/*****************************************/
+.container div {
+  background-color: #a2a0f3;
+  border-radius: 5px;
+  padding: 5px;
+  color: white;
+  font-size: 20px;
   text-align: center;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.buttons-draft {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   align-items: center;
+  justify-content: flex-end;
+}
+.buttons-draft button:nth-child(1) {
+  background-color: red;
+}
+.buttons-draft button:nth-child(2), .buttons button:nth-child(2) {
+  background-color: green;
+}
+.buttons-draft > button {
+  margin: -30px 5px 0 5px;
+  max-width: 100px;
+  box-sizing: border-box;
+  border: 1px solid gray;
+}
+.buttons, .buttons-mainblock {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.buttons {
+  padding: 5px 0 !important;
+}
+.buttons-mainblock {
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  padding: 0 !important;
+  background-color: #a3a6ab !important;
+  grid-area: buttons;
+}
+.buttons > button, .buttons-draft > button, .buttons-mainblock > button  {
+  flex-grow: 1;
+}
+.buttons-mainblock > button {
+  padding: 10px;
+  margin: 5px;
+  background-color: #554b4b;
   color: white;
+  border: none;
+}
+.buttons > button {
+  padding: 5px;
+  border: 3px solid gray;
+}
+.buttons > button:nth-child(1) {
+  margin-right: 10px;
+  background-color: gray;
+}
+.buttons > button:nth-child(2), .buttons-draft > button:nth-child(1), .buttons-mainblock > button:nth-child(2)  {
+  margin-left: 10px;
+  flex-grow: 2;
+}
+span {
+  background-color: green;
+  height: 15px;
 }
 
-.App-link {
-  color: #61dafb;
+.mainblock {
+  --scrollbarBG: #a3a6ab;
+  --thumbBG: #554b4b;
+}
+.mainblock > textarea::-webkit-scrollbar {
+  width: 11px;
+}
+.mainblock > textarea {
+  scrollbar-width: thin;
+  scrollbar-color: var(--thumbBG) var(--scrollbarBG);
+  padding: 0;
+}
+.mainblock  > textarea::-webkit-scrollbar-track {
+  background: var(--scrollbarBG);
+}
+.mainblock  > textarea::-webkit-scrollbar-thumb {
+  background-color: var(--thumbBG) ;
+  border-radius: 6px;
+  border: 3px solid var(--scrollbarBG);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+/***********************************************/
+@media (max-width: 1200px) {
+  .container {
+    display: grid;
+    grid-column: 1 / -1;
   }
-  to {
-    transform: rotate(360deg);
+  .buttons-draft {
+    justify-content: space-between;
+   /* margin: 5px;*/
+  }
+  .buttons-draft > button {
+    flex-grow: 1;
+    padding: 0;
+  }
+
+}
+
+@media (max-width: 538px) {
+    .for-large-screens {
+    display: none;
+  }
+  .buttons > button {
+    padding: 0;
+  }
+}
+@media(min-width: 539px) {
+  .for-small-screens {
+    display: none;
   }
 }

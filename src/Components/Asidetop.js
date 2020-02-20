@@ -1,21 +1,23 @@
 import React, {useState} from 'react'
+import { useDispatch } from 'react-redux';
+import {addNoteDraft, addNoteSave} from '../actions/actionCreators'
 
 export default function Asidetop({saveObj}) {
   const [cssText, setCssText] = useState({countLine: 2, value: ''})
+  const dispatch = useDispatch();
 
   const autosize = event => { // изменить размер тега textarea
     const numberOfLines = Math.ceil(event.target.scrollHeight/20)
     setCssText({...cssText, countLine: numberOfLines, value: event.target.value })
   }
 
-  const draftHandler = () => { 
-    saveObj(cssText.value, "draft") // сохранить  в Draft
-    setCssText({value: ''})
+  const draftHandler = () => {
+    dispatch(addNoteDraft())
   }
-  const saveHandler = () => { 
-    saveObj(cssText.value, "save") // сохранить  в Main
-    setCssText({value: ''})
+  const saveHandler = () => {
+    dispatch(addNoteSave())
   }
+
 
   return (
     <div className="asidetop">

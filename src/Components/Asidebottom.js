@@ -1,8 +1,10 @@
 import React, {useState, useEffect} from 'react'
+import { useSelector, useDispatch } from 'react-redux';
 
 export default function Asidebottom({data, removeHandler}) {
   const [dataBottom, setDataBottom] = useState(data) 
-
+  const {id, text, mark, type} = useSelector(state => state.serviceAdd)
+  
   useEffect(() => {
     setDataBottom(data)
   }, [data]) 

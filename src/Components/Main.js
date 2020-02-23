@@ -1,19 +1,22 @@
-import React, {useState, useEffect}  from 'react'
+import React, {useEffect, useState} from 'react'
+import Block from './Block'
 
-export default function Main({data}) {
+export default function Main({data, saveObj, indraftHandler}) {
+  
+  const onDraft = (el) => {
+    saveObj(el.text, "draft")
+    indraftHandler(el)
+  }
+  
+  useEffect(() => {
+    console.log(data)
+  }, [data])
 
 
   return (
     <div className="main">
       {data.length > 0 ? data.map(el =>
-        <div className="mainblock" key={el.id}>
-          <textarea placeholder="Input" cols="30" value={el.text}></textarea>
-          <span></span>
-          <div className="buttons-mainblock">
-            <button>Draft</button>
-            <button>Mark</button>
-          </div>
-        </div>
+        <Block el={el} onDraft={onDraft} key={el.id} data={data} saveObj={saveObj} />
       ) : null }
     </div>
   )

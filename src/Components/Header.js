@@ -1,11 +1,21 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 
+export default function Header({blocks}) {
+  const [amount, setAmount] = useState(0)
 
-export default function Header() {
+  useEffect(() => {
+    if(blocks.length > 0) {
+      const res = blocks.filter(o => o.mark === "green") 
+      setAmount(res.length)
+    }
+}, [blocks])
+
+  
+
   return (
     <div className="header">
       <h1>React app for Aventica</h1>
-      <h2>3</h2>
+      <h2>{amount}</h2>
     </div>
   )
 }

@@ -158,7 +158,7 @@
   flex-grow: 2;
 }
 span {
-  background-color: green;
+  /*background-color: green;*/
   height: 15px;
 }
 

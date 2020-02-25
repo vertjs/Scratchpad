@@ -12,7 +12,7 @@ export default function Header({blocks}) {
 
   return (
     <div className="header">
-      <h1>React app for Aventica</h1>
+      <h1>React app for saving notes</h1>
       <h2>{amount}</h2>
     </div>
   )

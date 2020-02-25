@@ -11,8 +11,8 @@ export default function App() {
   const [draft, setDraft] = useState([])
   const [save, setSave] = useState([])
 
-  const saveObj = (input, ind, color = "red", id=nanoid()) => {
-    setArr([...arr, {id: id, text: input, index: ind, mark: color}]) 
+  const saveObj = (input, ind, color = "red", id =nanoid() ) => {
+    setArr([...arr, {id: id, text: input, index: ind, span: color}])
   }
 
   const removeHandler = (el) => {
@@ -27,10 +27,9 @@ export default function App() {
 
   const inMainHandler = (el) => {
     setDraft(prev => prev.filter(o => o.id !== el.id))
-    setSave([...save, {id: el.id, text: el.text, index: el.index, mark: "red"}]) 
+    setSave([...save, {id: el.id, text: el.text, index: el.index, span: "red"}]) 
     setArr(prev => prev.filter(o => o.id !== el.id))
   }
-
 
   useEffect(() => {
     // eslint-disable-next-line no-unused-expressions
@@ -42,20 +41,20 @@ export default function App() {
             let res = save.filter(s => s.id === o.id)
             // eslint-disable-next-line no-unused-expressions
             res.length === 0 ? 
-            setSave([...save, {id: o.id, text: o.text, index: o.index, mark: "red"}]) 
+            setSave([...save, {id: o.id, text: o.text, index: o.index, span: "red"}]) 
             : null
           } else {
-            setSave([...save, {id: o.id, text: o.text, index: o.index, mark: "red"}]) 
+            setSave([...save, {id: o.id, text: o.text, index: o.index, span: "red"}]) 
           }
         } else if(o.index === "draft") {
             if(draft.length !== 0) {
               let res = draft.filter(d => d.id === o.id)
               // eslint-disable-next-line no-unused-expressions
               res.length === 0  ? 
-              setDraft([...draft, {id: o.id, text: o.text, index: o.index, mark: "red"}])
+              setDraft([...draft, {id: o.id, text: o.text, index: o.index, span: "red"}])
               : null
             } else {
-              setDraft([...draft, {id: o.id, text: o.text, index: o.index, mark: "red"}])
+              setDraft([...draft, {id: o.id, text: o.text, index: o.index, span: "red"}])
             }
           }
       }
@@ -65,10 +64,10 @@ export default function App() {
    return (
     <div className="grid">
       <div className="container">
-        <Header blocks={save}  />
+        <Header blocks={arr}  />
         <Asidetop saveObj={saveObj}/> 
         <Asidebottom data={draft} removeHandler={removeHandler} inMainHandler={inMainHandler}/>
-        <Main data={save} saveObj={saveObj} indraftHandler={indraftHandler} />
+        <Main save={save} saveObj={saveObj} indraftHandler={indraftHandler} setArr={setArr}/>
       </div>
     </div>
   );

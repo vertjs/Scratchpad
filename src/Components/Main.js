@@ -1,22 +1,18 @@
-import React, {useEffect, useState} from 'react'
+import React from 'react'
 import Block from './Block'
 
-export default function Main({data, saveObj, indraftHandler}) {
+export default function Main({save, saveObj, indraftHandler, setArr}) {
   
   const onDraft = (el) => {
     saveObj(el.text, "draft")
+    setArr(prev => prev.filter(o => o.id !== el.id))
     indraftHandler(el)
   }
   
-  useEffect(() => {
-    console.log(data)
-  }, [data])
-
-
   return (
     <div className="main">
-      {data.length > 0 ? data.map(el =>
-        <Block el={el} onDraft={onDraft} key={el.id} data={data} saveObj={saveObj} />
+      {save.length > 0 ? save.map(el =>
+        <Block el={el} onDraft={onDraft} key={el.id} saveObj={saveObj} setArr={setArr} />
       ) : null }
     </div>
   )

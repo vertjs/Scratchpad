@@ -5,12 +5,10 @@ export default function Header({blocks}) {
 
   useEffect(() => {
     if(blocks.length > 0) {
-      const res = blocks.filter(o => o.mark === "green") 
+      const res = blocks.filter(o => o.span === "green") 
       setAmount(res.length)
     }
 }, [blocks])
-
-  
 
   return (
     <div className="header">
